@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="KaziLink Tanzania connects customers with local service providers. Contact providers directly or ask KaziLink for help.">
+<title>KaziLink Tanzania | Find Local Services</title>
+<style>
+:root{--navy:#0b1f33;--teal:#0f8b7a;--mint:#dff7f3;--ink:#102a43;--muted:#64748b;--line:#e5e7eb;--bg:#f7f9fc}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:1080px;margin:auto;padding:0 18px}header{background:linear-gradient(135deg,#0b1f33,#0f766e);color:#fff;padding:22px 0 42px;border-radius:0 0 30px 30px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:25px;font-weight:900}.brand b{color:#99f6e4}.nav small{opacity:.8}
+.hero{padding:46px 0 8px}.hero h1{font-size:clamp(35px,7vw,62px);line-height:1.02;max-width:800px;margin:0 0 14px}.hero p{font-size:17px;line-height:1.6;max-width:700px;color:#dbeafe}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.btn{border:0;border-radius:12px;padding:13px 17px;font-weight:800;cursor:pointer;font-size:15px}.primary{background:#14b8a6;color:#063c36}.light{background:#fff;color:#0b1f33}
+.search{background:#fff;padding:8px;border-radius:16px;display:flex;max-width:760px;margin-top:18px}.search input{flex:1;min-width:0;border:0;outline:0;padding:13px;font-size:16px}
+main{padding:28px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap}h2{margin:0 0 12px;font-size:26px}.muted{color:var(--muted)}
+.cats{display:flex;gap:9px;overflow:auto;padding:3px 0 12px}.cat{white-space:nowrap;background:#fff;border:1px solid var(--line);padding:11px 14px;border-radius:13px;font-weight:700}.cat.active{background:var(--mint);border-color:#b9e8e1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px;margin-top:14px}
+.card,.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.top{display:flex;gap:12px;align-items:center}.avatar{width:50px;height:50px;border-radius:15px;background:var(--mint);display:grid;place-items:center;font-weight:900}.card h3{margin:0 0 3px}.small{color:var(--muted);font-size:13px;line-height:1.45}.stars{margin:12px 0 7px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.tag{background:#f1f5f9;padding:6px 8px;border-radius:8px;font-size:12px}.card .btn{width:100%;margin-top:5px}
+.contact-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0}.contact-panel>div{border-radius:20px;padding:22px}.direct{background:#e8fbf7}.assist{background:#eef2ff}.contact-panel h3{margin:0 0 7px;font-size:20px}.contact-panel p{margin:0 0 15px;color:#475569;line-height:1.5}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step b{font-size:13px}.step p{margin:8px 0 0}
+.cta{margin:30px 0;background:#0b1f33;color:#fff;border-radius:22px;padding:25px}.cta p{color:#cbd5e1;line-height:1.5}footer{text-align:center;padding:28px 18px;color:var(--muted);font-size:13px}
+@media(max-width:700px){.contact-panel,.how{grid-template-columns:1fr 1fr}.search{flex-direction:column}.search .btn{width:100%}}
+@media(max-width:480px){.contact-panel,.how{grid-template-columns:1fr}.hero{padding-top:32px}.nav small{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="nav"><div class="brand">Kazi<b>Link</b> 🇹🇿</div><small>Local services marketplace</small></div>
+<div class="hero"><h1>Find the right person for the job.</h1>
+<p>Discover local service providers in Tanzania. Contact a provider directly, or ask KaziLink to help you find the right person.</p>
+<div class="actions"><button class="btn primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Find a service</button><button class="btn light" onclick="askKaziLink()">Ask KaziLink for help</button></div>
+<div class="search"><input id="q" aria-label="Search services" placeholder="What do you need? e.g. CV, barber, phone repair"><button class="btn primary" onclick="render()">Search</button></div>
+</div></div></header>
+
+<main class="wrap">
+<section id="services"><div class="section-head"><div><h2>Popular services</h2><div class="muted">Choose a category or search for what you need.</div></div></div>
+<div class="cats" id="cats">
+<button class="cat active" onclick="setCat('All',this)">All</button><button class="cat" onclick="setCat('Design',this)">🎨 Design</button><button class="cat" onclick="setCat('Beauty',this)">💈 Beauty</button><button class="cat" onclick="setCat('Phones',this)">📱 Phones</button><button class="cat" onclick="setCat('Home',this)">🏠 Home</button><button class="cat" onclick="setCat('Education',this)">📚 Education</button><button class="cat" onclick="setCat('Business',this)">💼 Business</button>
+</div></section>
+
+<section><h2>People ready to work</h2><div id="cards" class="grid"></div></section>
+
+<section class="contact-panel">
+<div class="direct"><h3>🤝 Contact a provider directly</h3><p>See a service you like? Contact the provider directly and discuss the job, price and timing.</p><button class="btn primary" onclick="document.getElementById('cards').scrollIntoView({behavior:'smooth'})">Browse providers</button></div>
+<div class="assist"><h3>🧭 Ask KaziLink for help</h3><p>Not sure who to choose? Tell KaziLink what you need and we'll help connect you with a provider.</p><button class="btn" style="background:#4f46e5;color:#fff" onclick="askKaziLink()">Ask for help</button></div>
+</section>
+
+<section><h2>How KaziLink works</h2><div class="how">
+<div class="step"><b>01 — SEARCH</b><p class="small">Find a service or provider.</p></div><div class="step"><b>02 — CONNECT</b><p class="small">Contact the provider directly or ask KaziLink.</p></div><div class="step"><b>03 — AGREE</b><p class="small">Discuss the job, price and timing before work starts.</p></div><div class="step"><b>04 — REVIEW</b><p class="small">Share your experience after the service.</p></div>
+</div></section>
+
+<section class="cta"><h2>Have a skill? Turn it into income.</h2><p>Design, repair, beauty, tutoring, cleaning, photography, delivery and more. Join KaziLink as a service provider.</p><button class="btn primary" onclick="offerService()">Offer your service</button></section>
+</main>
+<footer>KaziLink Tanzania · Connecting customers with local service providers.</footer>
+
+<script>
+const providers=[
+{initials:'JB',name:'Jos Ben',service:'Design & short video ads',cat:'Design',tags:['Posters','Video ads']},
+{initials:'PR',name:'Phone Repair Pro',service:'Phone repair',cat:'Phones',tags:['Screen repair','Software']},
+{initials:'MB',name:'Modern Barber',service:'Barber',cat:'Beauty',tags:['Haircut','Beard']},
+{initials:'WD',name:'Word & CV Help',service:'Documents',cat:'Business',tags:['CVs','Typing','Translation']}
+];
+let currentCat='All';
+function render(){
+const q=document.getElementById('q').value.trim().toLowerCase();
+const list=providers.filter(p=>(currentCat==='All'||p.cat===currentCat)&&(`${p.name} ${p.service} ${p.cat} ${p.tags.join(' ')}`.toLowerCase().includes(q)));
+document.getElementById('cards').innerHTML=list.length?list.map(p=>`<article class="card"><div class="top"><div class="avatar">${p.initials}</div><div><h3>${p.name}</h3><div class="small">${p.service} · Tanzania</div></div></div><div class="stars">★★★★★ <span class="small">New provider</span></div><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><button class="btn primary" onclick="contactProvider('${p.name}')">Contact provider</button></article>`).join(''):`<div class="card"><h3>No matching provider yet.</h3><p class="small">Ask KaziLink and we can help you find someone.</p><button class="btn primary" onclick="askKaziLink()">Ask KaziLink for help</button></div>`;
+}
+function setCat(cat,btn){currentCat=cat;document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render();}
+function contactProvider(name){alert('This provider listing is currently a demo. When a real provider is added, this button will open their WhatsApp/contact details.');}
+function askKaziLink(){const message=encodeURIComponent('Hello KaziLink 👋🏽 I need help finding a service provider. I need: ');window.open('https://wa.me/255771656366?text='+message,'_blank');}
+function offerService(){alert('Provider registration is the next feature. We will add a simple form for name, service, location and WhatsApp number.');}
+document.getElementById('q').addEventListener('input',render);render();
+</script>
+</body></html>
